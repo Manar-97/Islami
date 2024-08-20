@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami/UI/providers/theme_provider.dart';
-import 'package:islami/UI/utils/app_styles.dart';
 import 'package:islami/UI/widgets/app_scaffold.dart';
 import 'package:islami/model/sura_details_argu.dart';
 import 'package:provider/provider.dart';
-
-import '../../utils/app_colors.dart';
+import '../../providers/my_provider.dart';
 
 class SuraDetails extends StatefulWidget {
-  SuraDetails({super.key});
+  const SuraDetails({super.key});
 
   static const String routName = 'sura_details';
 
@@ -19,7 +16,7 @@ class SuraDetails extends StatefulWidget {
 
 class _SuraDetailsState extends State<SuraDetails> {
   late SuraDetailsArgs args;
-  late ThemeProvider themeProvider;
+  late MyProvider myProvider;
   String fileContent = '';
 
   @override
@@ -29,27 +26,26 @@ class _SuraDetailsState extends State<SuraDetails> {
       readFile();
     }
     return AppScaffold(
-      body: fileContent.isEmpty
-          ? buildLoading()
-          : buildSuraContent(),
+      body: fileContent.isEmpty ? buildLoading() : buildSuraContent(),
     );
   }
 
   Widget buildLoading() {
     return Center(
-            child: CircularProgressIndicator(
-            color: themeProvider.isDarkThemeEnabled ? AppColors.accentDarkColor : AppColors.primaryColor,
-          ));
+        child: CircularProgressIndicator(
+      color: Theme.of(context).colorScheme.background,
+    ));
   }
+
   Widget buildSuraContent() {
-    themeProvider = Provider.of(context);
+    myProvider = Provider.of(context);
     return Center(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width * 0.85,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25), 
-            color: themeProvider.isDarkThemeEnabled ? Color(0xFF141A2E):Color(0xFFF8F8F8)),
+            borderRadius: BorderRadius.circular(25),
+            color: Theme.of(context).colorScheme.background),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: SingleChildScrollView(
@@ -60,26 +56,34 @@ class _SuraDetailsState extends State<SuraDetails> {
                   children: [
                     Text(
                       "${args.suraName}",
-                      style: Theme.of(context).textTheme.displayLarge?.copyWith(fontWeight: FontWeight.bold,fontSize: 25),
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayLarge
+                          ?.copyWith(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
                     IconButton(
                         onPressed: () {},
-                        icon:const Icon(
+                        icon: const Icon(
                           Icons.play_circle,
                           size: 33,
                         ),
-                        color: themeProvider.isDarkThemeEnabled?AppColors.accentDarkColor:Colors.black)
+                        color:Theme.of(context).bottomNavigationBarTheme.selectedItemColor)
                   ],
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
-                  child: Divider(color: themeProvider.isDarkThemeEnabled ? AppColors.accentDarkColor : AppColors.primaryColor, thickness: 2),
+                  child: Divider(
+                      color: Theme.of(context).colorScheme.background,
+                      thickness: 2),
                 ),
                 Text(
                   fileContent,
                   textDirection: TextDirection.rtl,
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 18),
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayLarge
+                      ?.copyWith(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
               ],

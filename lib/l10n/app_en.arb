@@ -9,5 +9,9 @@
   "settings":"Settings",
   "suraname":"Sura Name",
   "versesnumber":"Verses Number",
-  "hadethnumber":"Hadeth Number"
+  "hadethnumber":"Hadeth Number",
+  "dark": "dark",
+  "light": "light",
+  "en": "english",
+  "ar": "arabic"
 }

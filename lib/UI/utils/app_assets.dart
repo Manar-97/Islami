@@ -1,6 +1,7 @@
 abstract class AppAssets {
   static const String defaultPath = "assets/images/";
   static const String splash = "${defaultPath}splash.png";
+  static const String splashdark = "${defaultPath}splashdark.png";
   static const String background = "${defaultPath}default_bg.png";
   static const String backgroundDark = "${defaultPath}dark_bg.png";
   static const String icQuran = "${defaultPath}icon_quran.png";

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:islami/UI/utils/app_assets.dart';
-
+import 'package:provider/provider.dart';
+import '../../providers/my_provider.dart';
 import '../home/home.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({super.key});
+   const Splash({super.key});
   static const String routName = "splash";
 
   @override
@@ -12,18 +12,20 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  late MyProvider myProvider;
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2),(){
+    Future.delayed(const Duration(seconds: 2),(){
       Navigator.pushReplacementNamed(context, Home.routName);
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
+    myProvider = Provider.of(context);
     return Scaffold(
-      body: Image.asset(AppAssets.splash),
+      body: Image.asset(myProvider.splash),
     );
   }
 }

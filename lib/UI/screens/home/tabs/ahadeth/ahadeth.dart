@@ -1,17 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami/UI/providers/theme_provider.dart';
 import 'package:islami/UI/screens/hadeth_details/hadeth_details.dart';
 import 'package:islami/UI/utils/extentions/build_context_extentions.dart';
 import 'package:provider/provider.dart';
 import '../../../../../model/hadeth.dart';
+import '../../../../providers/my_provider.dart';
 import '../../../../utils/app_assets.dart';
-import '../../../../utils/app_colors.dart';
-import '../../../../utils/app_styles.dart';
 
 class Ahadeth extends StatefulWidget {
-  Ahadeth({super.key});
+  const Ahadeth({super.key});
 
   @override
   State<Ahadeth> createState() => _AhadethState();
@@ -26,10 +24,10 @@ class _AhadethState extends State<Ahadeth> {
     super.initState();
   }
 
-  late ThemeProvider themeProvider;
+  late MyProvider myProvider;
   @override
   Widget build(BuildContext context) {
-    themeProvider = Provider.of(context);
+    myProvider = Provider.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -47,7 +45,7 @@ class _AhadethState extends State<Ahadeth> {
                       Expanded(
                           child: Text(
                             context.local.hadethnumber,
-                        style:Theme.of(context).textTheme.displayLarge?.copyWith(fontFamily: "ElMessiri",fontSize: 25,fontWeight:FontWeight.w600),
+                        style:Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       )),
                     ],
@@ -81,7 +79,7 @@ class _AhadethState extends State<Ahadeth> {
   Widget buildAhadethList() {
     return Expanded(
         child: hadethList.isEmpty
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : ListView.builder(
                 itemCount: hadethList.length,
                 itemBuilder: (context, index) {
@@ -95,7 +93,7 @@ class _AhadethState extends State<Ahadeth> {
                         Expanded(
                           child: Text(
                             hadethList[index].hadethTitle,
-                            style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 22,fontFamily: 'Inter',fontWeight: FontWeight.w400),
+                            style: Theme.of(context).textTheme.labelLarge,
                             textAlign: TextAlign.center,
                           ),
                         )
@@ -106,7 +104,7 @@ class _AhadethState extends State<Ahadeth> {
   }
 
   Divider buildDivider() =>
-      Divider(color: themeProvider.isDarkThemeEnabled ? AppColors.accentDarkColor : AppColors.primaryColor, thickness: 3);
+      Divider(color: Theme.of(context).colorScheme.background, thickness: 3);
 
   Expanded buildHeaderImage() {
     return Expanded(

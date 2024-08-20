@@ -17,38 +17,4 @@ abstract class AppStyles {
       fontSize: 22,
       fontWeight: FontWeight.w400,
       fontFamily: 'Inter');
-
-  static ThemeData lightTheme = ThemeData(
-      scaffoldBackgroundColor: AppColors.transparentColor,
-      primaryColor: AppColors.primaryColor,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.transparentColor,
-        titleTextStyle: appBarTextStyle,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      textTheme: const TextTheme(
-        displayLarge: mainTitleTextStyle,
-        displayMedium: titleTextStyle
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: AppColors.accentColor,
-      ));
-
-  static ThemeData darkTheme = ThemeData(
-      scaffoldBackgroundColor: AppColors.transparentColor,
-      primaryColor: AppColors.primaryDarkColor,
-      appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.transparentColor,
-        titleTextStyle: appBarTextStyle.copyWith(color: AppColors.whiteColor),
-        elevation: 0,
-        centerTitle: true,
-      ),
-      textTheme: TextTheme(
-        displayLarge: mainTitleTextStyle.copyWith(color: AppColors.whiteColor),
-        displayMedium: titleTextStyle.copyWith(color: AppColors.whiteColor)
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: AppColors.accentDarkColor,
-      ));
 }

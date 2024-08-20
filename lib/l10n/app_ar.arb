@@ -9,5 +9,9 @@
   "settings":"الاعدادات",
   "suraname":"اسم السورة",
   "versesnumber":"عدد الآيات",
-  "hadethnumber":"رقم الحديث"
+  "hadethnumber":"رقم الحديث",
+  "dark": "غامق",
+  "light": "فاتح",
+  "en": "الانجليزية",
+  "ar": "العربية"
 }

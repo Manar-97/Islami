@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:islami/UI/utils/app_styles.dart';
+import 'package:islami/UI/providers/my_provider.dart';
 import 'package:islami/UI/widgets/app_scaffold.dart';
 import 'package:provider/provider.dart';
 import '../../../model/hadeth.dart';
-import '../../providers/theme_provider.dart';
-import '../../utils/app_colors.dart';
 
 class HadethDetails extends StatefulWidget {
   HadethDetails({super.key});
@@ -16,12 +14,12 @@ class HadethDetails extends StatefulWidget {
 }
 
 class _HadethDetailsState extends State<HadethDetails> {
-  late ThemeProvider themeProvider;
+  late MyProvider myProvider;
 
   @override
   Widget build(BuildContext context) {
     Hadeth hadeth = ModalRoute.of(context)!.settings.arguments as Hadeth;
-    themeProvider = Provider.of(context);
+    myProvider = Provider.of(context);
     return AppScaffold(
       body: buildHadethContent(hadeth.hadethContent, hadeth.hadethTitle),
     );
@@ -34,9 +32,7 @@ class _HadethDetailsState extends State<HadethDetails> {
         width: MediaQuery.of(context).size.width * 0.85,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: themeProvider.isDarkThemeEnabled
-                ? Color(0xFF141A2E)
-                : Color(0xFFF8F8F8)),
+            color: Theme.of(context).cardTheme.color,),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: SingleChildScrollView(
@@ -55,11 +51,9 @@ class _HadethDetailsState extends State<HadethDetails> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
                   child: Divider(
-                      color: themeProvider.isDarkThemeEnabled
-                          ? AppColors.accentDarkColor
-                          : AppColors.primaryColor,
+                      color: Theme.of(context).colorScheme.background,
                       thickness: 2),
                 ),
                 Text(

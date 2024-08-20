@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:islami/UI/providers/theme_provider.dart';
 import 'package:islami/UI/utils/app_assets.dart';
 import 'package:islami/UI/utils/app_styles.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../providers/my_provider.dart';
 import '../../../../utils/app_colors.dart';
 
 class Sebha extends StatefulWidget {
@@ -35,48 +32,43 @@ class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
     loadCounter();
   }
 
-  late ThemeProvider themeProvider;
+  late MyProvider myProvider;
   @override
   Widget build(BuildContext context) {
-    themeProvider = Provider.of(context);
+    myProvider = Provider.of(context);
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
               margin: const EdgeInsets.only(left: 62, top: 10),
-              child: Image.asset(themeProvider.isDarkThemeEnabled
+              child: Image.asset(myProvider.mode == ThemeMode.dark
                   ? AppAssets.logoHeadSebhaDark
                   : AppAssets.logoHeadSebha)),
           AnimatedRotation(
               duration: const Duration(milliseconds: 200),
               turns: turns,
-              child: Image.asset(themeProvider.isDarkThemeEnabled
-                  ? AppAssets.logoBodySebhaDark
-                  : AppAssets.logoBodySebha)),
+              child: Image.asset(myProvider.mode == ThemeMode.dark
+              ? AppAssets.logoBodySebhaDark
+              : AppAssets.logoBodySebha)),
           Padding(
             padding: const EdgeInsets.all(30),
             child: Text(
               "عدد التسبيحات",
-              style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontFamily: "ElMessiri",
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: themeProvider.isDarkThemeEnabled
-                  ? AppColors.primaryDarkColor
-                  : AppColors.primaryColor,
+              color: Theme.of(context).colorScheme.background,
             ),
             height: 60,
             width: 60,
             child: Center(
                 child: Text(
               '$counter',
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 22,fontFamily: 'Inter',fontWeight: FontWeight.w400),
+                  style: Theme.of(context).textTheme.bodyMedium,
             )),
           ),
           const SizedBox(height: 20),
@@ -84,9 +76,7 @@ class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(35),
-                color: themeProvider.isDarkThemeEnabled
-                    ? AppColors.accentDarkColor
-                    : AppColors.primaryColor,
+                color: Theme.of(context).colorScheme.background,
               ),
               height: 55,
               width: 190,

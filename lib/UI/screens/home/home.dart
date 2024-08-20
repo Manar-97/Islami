@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:islami/UI/providers/theme_provider.dart';
 import 'package:islami/UI/screens/home/tabs/ahadeth/ahadeth.dart';
 import 'package:islami/UI/screens/home/tabs/quran/quran.dart';
 import 'package:islami/UI/screens/home/tabs/sebha/sabha.dart';
+import 'package:islami/UI/utils/app_Themes.dart';
 import 'package:islami/UI/utils/app_assets.dart';
 import 'package:islami/UI/utils/extentions/build_context_extentions.dart';
 import 'package:islami/UI/widgets/app_scaffold.dart';
 import 'package:provider/provider.dart';
+import '../../providers/my_provider.dart';
 import 'tabs/radio/radio.dart';
 import 'tabs/settings/settings.dart';
 
 class Home extends StatefulWidget {
-  Home({super.key});
+  const Home({super.key});
   static const String routName = "home";
 
   @override
@@ -20,19 +21,19 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int selectedTabIndex = 0;
-  Widget currentTab = Quran();
+  Widget currentTab = const Quran();
   List<Widget> tabs = [
-    Quran(),
-    Ahadeth(),
+    const Quran(),
+    const Ahadeth(),
     Sebha(),
     const MyRadio(),
-    Settings(),
+    const Settings(),
   ];
-  late ThemeProvider themeProvider;
+  late MyProvider myProvider;
 
   @override
   Widget build(BuildContext context) {
-    themeProvider = Provider.of(context);
+    myProvider = Provider.of(context);
     return AppScaffold(
       body: tabs[selectedTabIndex],
       bottonNavigation: buildBottomNavigation(),
@@ -41,22 +42,23 @@ class _HomeState extends State<Home> {
 
   Theme buildBottomNavigation() {
     return Theme(
-        data: Theme.of(context)
-            .copyWith(canvasColor: themeProvider.getPrimaryColor),
+        data: myProvider.mode == ThemeMode.dark
+        ? Themes.darkTheme
+        : Themes.lightTheme,
         child: BottomNavigationBar(
             currentIndex: selectedTabIndex,
             onTap: (index) {
               selectedTabIndex = index;
               if (selectedTabIndex == 0) {
-                currentTab = Quran();
+                currentTab = const Quran();
               } else if (selectedTabIndex == 1) {
-                currentTab = Ahadeth();
+                currentTab = const Ahadeth();
               } else if (selectedTabIndex == 2) {
                 currentTab = Sebha();
               } else if (selectedTabIndex == 2) {
                 currentTab = const MyRadio();
               }else{
-                currentTab = Settings();
+                currentTab =const Settings();
               }
               setState(() {});
             },

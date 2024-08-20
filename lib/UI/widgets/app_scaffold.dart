@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islami/UI/providers/theme_provider.dart';
 import 'package:islami/UI/utils/extentions/build_context_extentions.dart';
 import 'package:provider/provider.dart';
-import '../utils/app_assets.dart';
+import '../providers/my_provider.dart';
 import '../utils/app_colors.dart';
 
 class AppScaffold extends StatelessWidget {
@@ -10,15 +9,15 @@ class AppScaffold extends StatelessWidget {
 
   final Widget? body;
   final Widget? bottonNavigation;
-  late ThemeProvider themeProvider;
+  late MyProvider myemeProvider;
 
   @override
   Widget build(BuildContext context) {
-    themeProvider = Provider.of(context);
+    var myProvider = Provider.of<MyProvider>(context);
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(themeProvider.mainBackground))),
+              image: AssetImage(myProvider.mainBackground))),
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.local.islami),
