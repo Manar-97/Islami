@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../providers/theme_provider.dart';
 
 class Settings extends StatefulWidget {
-  Settings({super.key});
+  const Settings({super.key});
 
   @override
   State<Settings> createState() => _SettingsState();
@@ -27,8 +27,8 @@ class _SettingsState extends State<Settings> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             color: themeProvider.isDarkThemeEnabled
-                ? Color(0xFF141A2E)
-                : Color(0xFFF8F8F8)),
+                ? const Color(0xFF141A2E)
+                : const Color(0xFFF8F8F8)),
         child: Padding(
           padding: const EdgeInsets.all(40),
           child: Column(
@@ -39,14 +39,14 @@ class _SettingsState extends State<Settings> {
                       fontFamily: "ElMessiri",
                       fontSize: 28,
                       fontWeight: FontWeight.w600)),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Text(context.local.language,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       fontFamily: "ElMessiri",
                       fontSize: 25,
                       fontWeight: FontWeight.w600)),
               buildLangMenu(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildThemeSwitch(),
             ],
           ),
@@ -85,7 +85,39 @@ class _SettingsState extends State<Settings> {
         },
       );
 
-  Widget buildThemeSwitch() => Row(
+  // Widget buildThemeMenu() => DropdownButton(
+  //   value: themeProvider.changeTheme(themeProvider.themeMode),
+  //   dropdownColor: themeProvider.isDarkThemeEnabled
+  //       ? AppColors.primaryDarkColor
+  //       : AppColors.primaryColor,
+  //   focusColor:
+  //   themeProvider.isDarkThemeEnabled ? Colors.white : Colors.black,
+  //   style: TextStyle(
+  //       color:
+  //       themeProvider.isDarkThemeEnabled ? Colors.white : Colors.black),
+  //   items: const [
+  //     DropdownMenuItem<String>(
+  //       value: "isdark",
+  //       child: Text(
+  //         "ليلي",
+  //       ),
+  //     ),
+  //     DropdownMenuItem<String>(
+  //       value: "islight",
+  //       child: Text(
+  //         "نهاري",
+  //       ),
+  //     )
+  //   ],
+  //   isExpanded: true,
+  //   onChanged: (value) {
+  //     value = themeProvider.themeMode;
+  //     themeProvider.getTheme();
+  //   },
+  // );
+
+
+Widget buildThemeSwitch() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(context.local.theme,
@@ -96,12 +128,8 @@ class _SettingsState extends State<Settings> {
           Switch(
               value: themeProvider.isDarkThemeEnabled,
               activeColor: AppColors.accentDarkColor,
-              onChanged: (newValue) {
-                themeProvider.toggleTheme(
-                    themeProvider.themeMode == ThemeMode.dark
-                        ? ThemeOptions.lightTheme
-                        : ThemeOptions.darkTheme);
-                themeProvider.loadThemeMode();
+              onChanged: (value) {
+                themeProvider.toggleTheme();
                 setState(() {});
               }),
         ],

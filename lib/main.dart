@@ -13,24 +13,25 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp( ChangeNotifierProvider(
-    create: (_) => ThemeProvider(),
+    create: (_) => ThemeProvider()..toggleTheme(),
     child: ChangeNotifierProvider(
-      create:(_) => LanguageProvider(),
-        child: MyApp()),
+      create:(_) => LanguageProvider()..getLanguage(),
+        child:const MyApp()),
   ));
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     LanguageProvider languageProvider = Provider.of(context);
     ThemeProvider themeProvider = Provider.of(context);
+
     return MaterialApp(
-      theme: AppStyles.lightTheme,
-      darkTheme: AppStyles.darkTheme,
-      themeMode: themeProvider.themeMode,
+      theme: themeProvider.isDarkThemeEnabled ? AppStyles.lightTheme : AppStyles.lightTheme,
+      // darkTheme: AppStyles.darkTheme,
+      // themeMode: themeProvider.themeMode,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

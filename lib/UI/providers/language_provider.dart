@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageProvider extends ChangeNotifier {
   // String local = 'en';
+  String language = 'ar';
   late Locale _locale;
 
   Locale get locale => _locale;
@@ -23,5 +24,17 @@ class LanguageProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('languageCode', languageCode);
     notifyListeners();
+  }
+
+  Future<void> changeLanguage(String lang) async{
+    language = lang;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("isArabir", language == "ar");
+    notifyListeners();
+  }
+
+  Future<void> getLanguage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isDark = prefs.getBool("isArabir");
   }
 }

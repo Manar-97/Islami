@@ -55,7 +55,7 @@ class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
                   ? AppAssets.logoBodySebhaDark
                   : AppAssets.logoBodySebha)),
           Padding(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             child: Text(
               "عدد التسبيحات",
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
