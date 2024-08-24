@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islami/UI/screens/home/tabs/settings/theme_bottom_sheet.dart';
 import 'package:islami/UI/utils/extentions/build_context_extentions.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../providers/my_provider.dart';
-import 'language_bottom_sheet.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -132,15 +129,5 @@ class _SettingsState extends State<Settings> {
         ),
       ),
     );
-  }
-
-  void showThemeButtomSheet() {
-    showModalBottomSheet(
-        context: context, builder: (context) => const ThemeBottomSheet());
-  }
-
-  void showLangButtomSheet() {
-    showModalBottomSheet(
-        context: context, builder: (context) => const LanguageBottomSheet());
   }
 }
