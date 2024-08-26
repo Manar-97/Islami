@@ -66,56 +66,9 @@ class MyProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ThemeMode themeMode = ThemeMode.light;
-  // Locale currentLocal = const Locale("ar");
-  // late SharedPreferences storage;
-  //
-  // Future<void> getThemeLang() async {
-  //   storage = await SharedPreferences.getInstance();
-  //   if (storage.getBool("isArabic") ?? false) {
-  //     currentLocal = const Locale("ar");
-  //   } else {
-  //     currentLocal = const Locale("en");
-  //   }
-  //   if (storage.getBool("isDark") ?? false) {
-  //     themeMode = ThemeMode.dark;
-  //   } else {
-  //     themeMode = ThemeMode.light;
-  //   }
-  // }
-  //
-  // changeTheme(ThemeMode mode) {
-  //   themeMode = mode;
-  //   notifyListeners();
-  //   bool isDark = themeMode == ThemeMode.dark ? true : false;
-  //   _saveTheme(isDark);
-  // }
-  //
-  // changeLocal(Locale locale) {
-  //   currentLocal = locale;
-  //   notifyListeners();
-  //   bool isArabic = locale == const Locale("ar") ? true : false;
-  //   _saveLang(isArabic);
-  // }
-  //
-  // void _saveLang(bool isArabic) {
-  //   storage.setBool("isArabic", isArabic);
-  // }
-  //
-  // void _saveTheme(bool isDark) {
-  //   storage.setBool("isDark", isDark);
-  // }
-  //
-  //
   String get mainBackground =>
       mode == ThemeMode.dark ? AppAssets.backgroundDark : AppAssets.background;
 
    String get splash =>
        mode == ThemeMode.dark ? AppAssets.splashdark : AppAssets.splash;
-
-   // Color get getPrimaryColor =>
-   //     mode == ThemeMode.dark ? AppColors.primaryDarkColor : AppColors.primaryColor;
-
-  // Color get getLangColor => mode == ThemeMode.dark ? Colors.white : Colors.black;
-
 }
