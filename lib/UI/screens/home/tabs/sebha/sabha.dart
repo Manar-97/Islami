@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:islami/UI/utils/app_assets.dart';
 import 'package:islami/UI/utils/app_styles.dart';
+import 'package:islami/UI/utils/extentions/build_context_extentions.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../providers/my_provider.dart';
-import '../../../../utils/app_colors.dart';
 
 class Sebha extends StatefulWidget {
-  Sebha({super.key});
+  const Sebha({super.key});
 
   @override
   State<Sebha> createState() => _SebhaState();
@@ -15,8 +15,8 @@ class Sebha extends StatefulWidget {
 
 class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
   int counter = 0;
-  double turns = 0.0;
   int currentZekrIndex = 0;
+  double turns = 0.0;
   final List<String> azkar = [
     'أستغفر الله',
     'سبحان الله',
@@ -49,12 +49,12 @@ class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
               duration: const Duration(milliseconds: 200),
               turns: turns,
               child: Image.asset(myProvider.mode == ThemeMode.dark
-              ? AppAssets.logoBodySebhaDark
-              : AppAssets.logoBodySebha)),
+                  ? AppAssets.logoBodySebhaDark
+                  : AppAssets.logoBodySebha)),
           Padding(
             padding: const EdgeInsets.all(30),
             child: Text(
-              "عدد التسبيحات",
+              context.local.tsabehnum,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
@@ -68,7 +68,7 @@ class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
             child: Center(
                 child: Text(
               '$counter',
-                  style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             )),
           ),
           const SizedBox(height: 20),
@@ -78,8 +78,8 @@ class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
                 borderRadius: BorderRadius.circular(35),
                 color: Theme.of(context).colorScheme.background,
               ),
-              height: 55,
-              width: 190,
+              height: 60,
+              width: 250,
               child: Center(
                   child: Text(
                 azkar[currentZekrIndex],
@@ -100,14 +100,18 @@ class _SebhaState extends State<Sebha> with SingleTickerProviderStateMixin {
 
   Future<void> incrementCounter() async {
     final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      counter++;
-      if (counter % 33 == 0) {
-        currentZekrIndex = (currentZekrIndex + 1) % azkar.length;
-      }
-    });
     await prefs.setInt('counter', counter);
     await prefs.setInt('zekr', currentZekrIndex);
+      setState(() {
+        counter++;
+        if (counter >= 33) {
+          counter = 0;
+          currentZekrIndex = (currentZekrIndex + 1) % azkar.length;
+        }
+        // if (counter % 33 == 0) {
+        //   currentZekrIndex = (currentZekrIndex + 1) % azkar.length;
+        // }
+      });
   }
 
   void sebhaRotate() {

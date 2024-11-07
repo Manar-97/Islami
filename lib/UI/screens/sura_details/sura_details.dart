@@ -29,7 +29,6 @@ class _SuraDetailsState extends State<SuraDetails> {
       body: fileContent.isEmpty ? buildLoading() : buildSuraContent(),
     );
   }
-
   Widget buildLoading() {
     return Center(
         child: CircularProgressIndicator(
@@ -41,11 +40,11 @@ class _SuraDetailsState extends State<SuraDetails> {
     myProvider = Provider.of(context);
     return Center(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.7,
         width: MediaQuery.of(context).size.width * 0.85,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: Theme.of(context).colorScheme.background),
+            color: Theme.of(context).cardTheme.color,),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: SingleChildScrollView(
@@ -55,11 +54,11 @@ class _SuraDetailsState extends State<SuraDetails> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "${args.suraName}",
+                      args.suraName,
                       style: Theme.of(context)
                           .textTheme
-                          .displayLarge
-                          ?.copyWith(fontWeight: FontWeight.bold, fontSize: 25),
+                          .labelLarge
+                          ?.copyWith(fontWeight: FontWeight.bold, fontSize: 28),
                     ),
                     IconButton(
                         onPressed: () {},
@@ -82,8 +81,8 @@ class _SuraDetailsState extends State<SuraDetails> {
                   textDirection: TextDirection.rtl,
                   style: Theme.of(context)
                       .textTheme
-                      .displayLarge
-                      ?.copyWith(fontSize: 18),
+                      .labelLarge
+                      ?.copyWith(fontSize: 22),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -103,6 +102,6 @@ class _SuraDetailsState extends State<SuraDetails> {
     }
     fileContent = fileLines.join();
     setState(() {});
-    print("File Content = ${fileContent}");
+    print("File Content = $fileContent");
   }
 }

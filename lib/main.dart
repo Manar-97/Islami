@@ -51,8 +51,8 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       routes: {
         Splash.routName: (_) => const Splash(),
-        Home.routName: (_) => Home(),
-        SuraDetails.routName: (_) => SuraDetails(),
+        Home.routName: (_) => const Home(),
+        SuraDetails.routName: (_) => const SuraDetails(),
         HadethDetails.routName: (_) => HadethDetails(),
       },
       initialRoute: Splash.routName,

@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2),(){
+    Future.delayed(const Duration(seconds: 3),(){
       Navigator.pushReplacementNamed(context, Home.routName);
     });
     super.initState();
@@ -25,7 +25,13 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     myProvider = Provider.of(context);
     return Scaffold(
-      body: Image.asset(myProvider.splash),
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration:  BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(myProvider.splash)),
+        ),
+      ),
     );
   }
 }

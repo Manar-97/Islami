@@ -20,50 +20,53 @@ class _QuranState extends State<Quran> {
   @override
   Widget build(BuildContext context) {
     myProvider = Provider.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        buildHeaderImage(),
-        Expanded(
-          flex: 7,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Column(
-                children: [
-                  buildDivider(),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Text(
-                        context.local.versesnumber,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                        textAlign: TextAlign.center,
-                      )),
-                      Expanded(
-                          child: Text(
-                        context.local.suraname,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                        textAlign: TextAlign.center,
-                      ))
-                    ],
-                  ),
-                  buildDivider(),
-                  buildSuraList(),
-                ],
-              ),
-              VerticalDivider(
-                  thickness: 3,
-                  color: Theme.of(context).colorScheme.background,
-                  indent: 7),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          buildHeaderImage(),
+          Expanded(
+            flex: 7,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Column(
+                  children: [
+                    buildDivider(),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Text(
+                          context.local.versesnumber,
+                          style: Theme.of(context).textTheme.headlineMedium,
+                          textAlign: TextAlign.center,
+                        )),
+                        Expanded(
+                            child: Text(
+                          context.local.suraname,
+                          style: Theme.of(context).textTheme.headlineMedium,
+                          textAlign: TextAlign.center,
+                        ))
+                      ],
+                    ),
+                    buildDivider(),
+                    buildSuraList(),
+                  ],
+                ),
+                VerticalDivider(
+                    thickness: 3,
+                    color: Theme.of(context).colorScheme.background,
+                    indent: 7),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Expanded buildSuraList() {
+  Widget buildSuraList() {
     return Expanded(
       child: ListView.builder(
           itemCount: Constant.sure.length,
@@ -75,21 +78,29 @@ class _QuranState extends State<Quran> {
                         suraName: Constant.sure[index],
                         fileName: '${index + 1}.txt'));
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: Column(
                 children: [
-                  Expanded(
-                      child: Text(
-                    Constant.versesNumber[index].toString(),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  )),
-                  Expanded(
-                    child: Text(
-                      Constant.sure[index],
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                          child: Text(
+                        Constant.versesNumber[index].toString(),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        textAlign: TextAlign.center,
+                      )),
+                      Expanded(
+                        child: Text(
+                          Constant.sure[index],
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:25),
+                    child: buildContDivider(),
                   )
                 ],
               ),
@@ -98,10 +109,13 @@ class _QuranState extends State<Quran> {
     );
   }
 
-  Divider buildDivider() =>
+  Widget buildDivider() =>
       Divider(color: Theme.of(context).colorScheme.background, thickness: 3);
 
-  Expanded buildHeaderImage() {
+  Widget buildContDivider() =>
+      Divider(color: Theme.of(context).colorScheme.background, thickness: 2);
+
+  Widget buildHeaderImage() {
     return Expanded(
       flex: 3,
       child: Center(child: Image.asset(AppAssets.logoQuran)),

@@ -25,8 +25,8 @@ class _HomeState extends State<Home> {
   List<Widget> tabs = [
     const Quran(),
     const Ahadeth(),
-    Sebha(),
-    const MyRadio(),
+    const Sebha(),
+     MyRadio(),
     const Settings(),
   ];
   late MyProvider myProvider;
@@ -34,13 +34,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     myProvider = Provider.of(context);
-    return AppScaffold(
-      body: tabs[selectedTabIndex],
-      bottonNavigation: buildBottomNavigation(),
+    return SafeArea(
+      child: AppScaffold(
+        body: tabs[selectedTabIndex],
+        bottonNavigation: buildBottomNavigation(),
+      ),
     );
   }
 
-  Theme buildBottomNavigation() {
+  Widget buildBottomNavigation() {
     return Theme(
         data: myProvider.mode == ThemeMode.dark
         ? Themes.darkTheme
@@ -56,7 +58,7 @@ class _HomeState extends State<Home> {
               } else if (selectedTabIndex == 2) {
                 currentTab = Sebha();
               } else if (selectedTabIndex == 2) {
-                currentTab = const MyRadio();
+                currentTab = MyRadio();
               }else{
                 currentTab =const Settings();
               }

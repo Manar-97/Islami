@@ -28,7 +28,7 @@ class _HadethDetailsState extends State<HadethDetails> {
   Widget buildHadethContent(String content, String title) {
     return Center(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.7,
         width: MediaQuery.of(context).size.width * 0.85,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
@@ -45,7 +45,7 @@ class _HadethDetailsState extends State<HadethDetails> {
                       title,
                       style: Theme.of(context)
                           .textTheme
-                          .displayLarge
+                          .labelLarge
                           ?.copyWith(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
                   ],
@@ -61,7 +61,7 @@ class _HadethDetailsState extends State<HadethDetails> {
                   textDirection: TextDirection.rtl,
                   style: Theme.of(context)
                       .textTheme
-                      .displayLarge
+                      .labelLarge
                       ?.copyWith(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),

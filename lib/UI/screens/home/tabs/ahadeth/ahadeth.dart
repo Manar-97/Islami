@@ -28,36 +28,39 @@ class _AhadethState extends State<Ahadeth> {
   @override
   Widget build(BuildContext context) {
     myProvider = Provider.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        buildHeaderImage(),
-        Expanded(
-          flex: 7,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Column(
-                children: [
-                  buildDivider(),
-                   Row(
-                    children: [
-                      Expanded(
-                          child: Text(
-                            context.local.hadethnumber,
-                        style:Theme.of(context).textTheme.headlineMedium,
-                        textAlign: TextAlign.center,
-                      )),
-                    ],
-                  ),
-                  buildDivider(),
-                  buildAhadethList(),
-                ],
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          buildHeaderImage(),
+          Expanded(
+            flex: 7,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Column(
+                  children: [
+                    buildDivider(),
+                     Row(
+                      children: [
+                        Expanded(
+                            child: Text(
+                              context.local.hadethnumber,
+                          style:Theme.of(context).textTheme.headlineMedium,
+                          textAlign: TextAlign.center,
+                        )),
+                      ],
+                    ),
+                    buildDivider(),
+                    buildAhadethList(),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -87,16 +90,24 @@ class _AhadethState extends State<Ahadeth> {
                     onTap: () {
                       Navigator.pushNamed(context,HadethDetails.routName,arguments:hadethList[index] );
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: Column(
                       children: [
-                        Expanded(
-                          child: Text(
-                            hadethList[index].hadethTitle,
-                            style: Theme.of(context).textTheme.labelLarge,
-                            textAlign: TextAlign.center,
-                          ),
-                        )
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                hadethList[index].hadethTitle,
+                                style: Theme.of(context).textTheme.labelLarge,
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal:80),
+                          child: buildContDivider(),
+                        ),
                       ],
                     ),
                   );
@@ -105,6 +116,9 @@ class _AhadethState extends State<Ahadeth> {
 
   Divider buildDivider() =>
       Divider(color: Theme.of(context).colorScheme.background, thickness: 3);
+
+  Widget buildContDivider() =>
+      Divider(color: Theme.of(context).colorScheme.background, thickness: 2);
 
   Expanded buildHeaderImage() {
     return Expanded(

@@ -52,15 +52,15 @@ class Themes{
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           unselectedIconTheme: IconThemeData(size: 30),
-          selectedIconTheme: IconThemeData(size: 35, color: Color(0xFFFACC1D)),
+          selectedIconTheme: IconThemeData(size: 35, color: Color(0xFFcb9f17)),
           selectedItemColor: Colors.white),
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color(0xFF141A2E),
         primary: const Color(0xFF141A2E),
         onPrimary: const Color(0xFFFFFFFF),
-        secondary: const Color(0xFFFACC1D),
+        secondary: const Color(0xFFcb9f17),
         onSecondary: const Color(0xFF000000),
-        background: const Color(0xFFFACC1D),
+        background: const Color(0xFFcb9f17),
       ),
       useMaterial3: true,
       bottomSheetTheme: const BottomSheetThemeData(
